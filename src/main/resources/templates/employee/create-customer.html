@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Manage User</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h2>Add User Form</h2>
+        <hr>
+		<form th:action="@{/employee/customer/add-customer}" th:object="${userDto}" method="POST">
+			<input type="text" th:field="*{fullName}"
+				placeholder="User Name" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{username}"
+				   placeholder="username" class="form-control mb-4 col-4">
+
+			<input type="text" th:field="*{password}"
+				   placeholder="password" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{email}"
+			placeholder="Email" class="form-control mb-4 col-4">
+
+			<input type="text" th:field="*{address}"
+			placeholder="Address" class="form-control mb-4 col-4">
+
+			<input type="text" th:field="*{phoneNumber}"
+			placeholder="Phone" class="form-control mb-4 col-4">
+
+			<div>
+				<label for="dob">Date of Birth:</label>
+				<input type="date" id="dob" name="dob" th:field="*{dob}" required />
+			</div>
+			<div>
+				<label for="gender">Gender:</label>
+				<select id="gender" name="gender" th:field="*{gender}" required>
+					<option value="MALE">Male</option>
+					<option value="FEMALE">Female</option>
+					<option value="OTHER">Other</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-info col-2"> Save</button>
+		</form>
+		
+		<hr>
+		
+	</div>
+</body>
+</html>

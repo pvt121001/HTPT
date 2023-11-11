@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link th:href="@{styless}" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+<div class="Register">
+  <div class="Register__Form">
+    <h2>Register</h2>
+    <form th:action="@{/auth/register}" method="post" th:object="${registerDto}">
+      <div>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" th:field="*{fullName}" required />
+      </div>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" required />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{password}" required />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="*{email}" required />
+      </div>
+      <div>
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" th:field="*{dob}" required />
+      </div>
+      <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" th:field="*{gender}" required>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" required />
+      </div>
+      <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" th:field="*{address}" required />
+      </div>
+      <div class="Button">
+        <button type="submit">Register</button>
+      </div>
+    </form></div>
+</div>
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="utf-8" />-->
+<!--  <meta-->
+<!--          name="viewport"-->
+<!--          content="width=device-width, initial-scale=1, shrink-to-fit=no"-->
+<!--  />-->
+<!--  <link-->
+<!--          href="//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic"-->
+<!--          rel="stylesheet"-->
+<!--          type="text/css"-->
+<!--  />-->
+<!--  <link-->
+<!--          href="//fonts.googleapis.com/css?family=Montserrat:400,700"-->
+<!--          rel="stylesheet"-->
+<!--          type="text/css"-->
+<!--  />-->
+<!--  <link-->
+<!--          href="https://fonts.googleapis.com/css2?family=Italianno&display=swap"-->
+<!--          rel="stylesheet"-->
+<!--  />-->
+<!--  <link-->
+<!--          rel="stylesheet"-->
+<!--          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"-->
+<!--  />-->
+<!--  <script src="https://kit.fontawesome.com/44f557ccce.js"></script>-->
+<!--  &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+<!--  &lt;!&ndash; log on to codeastro.com for more projects &ndash;&gt;-->
+<!--  <link-->
+<!--          rel="stylesheet"-->
+<!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"-->
+<!--          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"-->
+<!--          crossorigin="anonymous"-->
+<!--  />-->
+<!--  <title>Online Flight Booking</title>-->
+<!--  <link rel="icon" href="../assets/images/brand.png" type="image/x-icon" />-->
+<!--  <link rel="stylesheet" href="assets/css/form.css">-->
+<!--</head>-->
+<!--<style>-->
+<!--  .astext {-->
+<!--    background: none;-->
+<!--    border: none;-->
+<!--    margin: 0;-->
+<!--    padding: 0;-->
+<!--    cursor: pointer;-->
+<!--  }-->
+<!--  @font-face {-->
+<!--    font-family: "product sans";-->
+<!--    src: url("../assets/css/Product Sans Bold.ttf");-->
+<!--  }-->
+<!--  h5:hover {-->
+<!--    color: #e8e8e8;-->
+<!--  }-->
+<!--  h5 {-->
+<!--    color: white;-->
+<!--    font-weight: bold;-->
+<!--    font-size: 20px;-->
+<!--    font-family: "Montserrat", sans-serif;-->
+<!--  }-->
+<!--  .btn-login {-->
+<!--    /* font-size: 22px ; */-->
+<!--    font-weight: bold;-->
+<!--    font-family: "Montserrat", sans-serif;-->
+<!--  }-->
+<!--</style>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">-->
+<!--  <a class="navbar-brand" href="index.php"><h5>Home</h5> </a>-->
+<!--  <button-->
+<!--          class="navbar-toggler"-->
+<!--          type="button"-->
+<!--          data-toggle="collapse"-->
+<!--          data-target="#navbarSupportedContent"-->
+<!--          aria-controls="navbarSupportedContent"-->
+<!--          aria-expanded="false"-->
+<!--          aria-label="Toggle navigation"-->
+<!--  >-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+
+<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--    <ul class="navbar-nav mr-auto">-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="feedback.html">-->
+<!--          <h5>Feedback</h5>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">-->
+<!--          <h5>About</h5>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    &lt;!&ndash; log on to codeastro.com for more projects &ndash;&gt;-->
+<!--    <div class="dropdown" style="margin-right: 70px">-->
+<!--      <button-->
+<!--              class="btn btn-login btn-secondary dropdown-toggle"-->
+<!--              type="button"-->
+<!--              id="dropdownMenuButton"-->
+<!--              data-toggle="dropdown"-->
+<!--              aria-haspopup="true"-->
+<!--              aria-expanded="false"-->
+<!--      >-->
+<!--        Login-->
+<!--      </button>-->
+<!--      <div class="dropdown-menu w-75" aria-labelledby="dropdownMenuButton">-->
+<!--        <a class="dropdown-item" href="login.html">Passenger</a>-->
+<!--        <a class="dropdown-item" href="admin/login.html">Administrator</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--<style>-->
+
+<!--  body {-->
+<!--    background: #bdc3c7;  /* fallback for old browsers */-->
+<!--    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */-->
+<!--    background: linear-gradient(to right, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */-->
+
+
+<!--  }-->
+<!--  @font-face {-->
+<!--    font-family: 'product sans';-->
+<!--    src: url('assets/css/Product Sans Bold.ttf');-->
+<!--  }-->
+<!--  h3 {-->
+<!--    text-align: center;-->
+<!--    /* font-family: 'Italianno', cursive; */-->
+<!--    font-family: 'product sans', cursive;-->
+<!--    font-weight: normal;-->
+<!--    font-size: 55px;-->
+<!--    margin-top: 20px !important;-->
+<!--  }-->
+
+<!--  input {-->
+<!--    /* background-color: #F8F9FA !important; */-->
+<!--    margin-bottom: 10px;-->
+<!--    border :0px !important;-->
+<!--    border-bottom: 2px solid #838383 !important;-->
+<!--    color :#838383 !important;-->
+<!--    border-radius: 0px !important;-->
+<!--    font-weight: bold !important;-->
+<!--  }-->
+<!--  label {-->
+<!--    color : #838383 !important;-->
+<!--    font-size: 19px;-->
+<!--  }-->
+<!--  .register{-->
+<!--    margin-top: 3%;-->
+<!--    padding: 3%;-->
+<!--  }-->
+<!--  .register-left{-->
+<!--    text-align: center;-->
+<!--    color: #fff;-->
+<!--    margin-top: 4%;-->
+<!--  }-->
+<!--  .register-left input{-->
+<!--    border: none;-->
+<!--    border-radius: 1.5rem;-->
+<!--    padding: 2%;-->
+<!--    width: 60%;-->
+<!--    background: #f8f9fa;-->
+<!--    font-weight: bold;-->
+<!--    color: #383d41;-->
+<!--    margin-top: 30%;-->
+<!--    margin-bottom: 3%;-->
+<!--    cursor: pointer;-->
+<!--  }-->
+<!--  .register-right{-->
+<!--    background: #f8f9fa;-->
+<!--    border-top-left-radius: 10% 50%;-->
+<!--    border-bottom-left-radius: 10% 50%;-->
+<!--  }-->
+<!--  .register-left img{-->
+<!--    margin-top: 15%;-->
+<!--    margin-bottom: 5%;-->
+<!--    width: 25%;-->
+<!--    -webkit-animation: mover 2s infinite  alternate;-->
+<!--    animation: mover 1s infinite  alternate;-->
+<!--  }-->
+<!--  @-webkit-keyframes mover {-->
+<!--    0% { transform: translateY(0); }-->
+<!--    100% { transform: translateY(-20px); }-->
+<!--  }-->
+<!--  @keyframes mover {-->
+<!--    0% { transform: translateY(0); }-->
+<!--    100% { transform: translateY(-20px); }-->
+<!--  }-->
+<!--  .register-left p{-->
+<!--    font-weight: lighter;-->
+<!--    padding: 12%;-->
+<!--    margin-top: -9%;-->
+<!--  }-->
+<!--  .register .register-form{-->
+<!--    padding: 60px;-->
+<!--    margin-top: 10%;-->
+<!--  }-->
+<!--  .btnRegister{-->
+<!--    float: right;-->
+<!--    margin-top: 10%;-->
+<!--    border: none;-->
+<!--    border-radius: 1.5rem;-->
+<!--    padding: 2%;-->
+<!--    background: #4e4e4e;-->
+<!--    color: #fff;-->
+<!--    font-weight: 600;-->
+<!--    width: 50%;-->
+<!--    cursor: pointer;-->
+<!--  }-->
+<!--  .register-heading{-->
+<!--    text-align: center;-->
+<!--    margin-top: 8%;-->
+<!--    margin-bottom: -15%;-->
+<!--    color: #495057;-->
+<!--  }-->
+<!--</style>-->
+
+
+<!--<main>-->
+<!--  <div class="container-fluid mt-0 register">-->
+<!--    <div class="row">-->
+<!--      &lt;!&ndash; <div class="col-md-3 register-left">-->
+
+<!--          <h3>Welcome</h3>-->
+<!--      </div> &ndash;&gt;-->
+<!--      <div class="col-md-1"></div>-->
+<!--      <div class="col-md-10 register-right">-->
+<!--        <div class="tab-content" id="myTabContent">-->
+<!--          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">-->
+<!--            <h3 class="register-heading text-secondary">PASSENGER REGISTRATION</h3>-->
+<!--            <div class="register-form">-->
+<!--              <form method="POST" th:action="@{/auth/register}" th:object="${registerDto}">-->
+<!--                <div class="conrainer-fluid">-->
+<!--                  <div class="row">-->
+<!--                    <div class="col-1 p-0">-->
+<!--                      <i class="fa fa-user text-secondary"-->
+<!--                         style="float: right;margin-top:35px;"></i>-->
+<!--                    </div>-->
+<!--                    <div class="col-md">-->
+<!--                      <div class="input-group">-->
+<!--                        <input type="text" name="username" id="username" placeholder="Username" required / >-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-1 p-0 mr-2">-->
+<!--                      <i class="fa fa-envelope text-secondary"-->
+<!--                         style="float: right;margin-top:35px;"></i>-->
+<!--                    </div>-->
+<!--                    <div class="col-md">-->
+<!--                      <div class="input-group">-->
+<!--                        <input type="text" name="email_id" id="email_id" placeholder="Email"-->
+<!--                               required>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-row">-->
+<!--                    <div class="col-1 p-0">-->
+<!--                      <i class="fa fa-lock text-secondary"-->
+<!--                         style="float: right;margin-top:35px;"></i>-->
+<!--                    </div>-->
+<!--                    <div class="col-md">-->
+<!--                      <div class="input-group">-->
+<!--                        <input type="password" name="password" id="password"  placeholder="Password"-->
+<!--                               required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+<!--                               title="Must contain at least one number and one uppercase and lowercase letter,-->
+<!--                                        and at least 8 or more characters" />-->
+<!--                      </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="col-1 p-0 mr-2">-->
+<!--                      <i class="fa fa-lock text-secondary"-->
+<!--                         style="float: right;margin-top:35px;"></i>-->
+<!--                    </div>-->
+<!--                    <div class="col-md">-->
+<!--                      <div class="input-group">-->
+<!--                        <input type="password" name="password_repeat"  placeholder="Confirm password"-->
+<!--                               id="password_repeat" required>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="text-center">-->
+<!--                    <button name="signup_submit" type="submit"-->
+<!--                            class="btn btn-info mt-5">-->
+<!--                      <div style="font-size: 1.5rem;">-->
+<!--                        <i class="fa fa-lg fa-arrow-right"></i> Complete-->
+<!--                      </div>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-1"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</main>-->
+
+<!--&lt;!&ndash; log on to codeastro.com for more projects &ndash;&gt;-->
+<!--<script-->
+<!--        src="https://code.jquery.com/jquery-3.5.1.js"-->
+<!--        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="-->
+<!--        crossorigin="anonymous"-->
+<!--&gt;</script>-->
+<!--<script-->
+<!--        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"-->
+<!--        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"-->
+<!--        crossorigin="anonymous"-->
+<!--&gt;</script>-->
+<!--<script-->
+<!--        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"-->
+<!--        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"-->
+<!--        crossorigin="anonymous"-->
+<!--&gt;</script>-->
+<!--</body>-->
+<!--</html>-->
+<!--&lt;!&ndash; log on to codeastro.com for more projects &ndash;&gt;-->

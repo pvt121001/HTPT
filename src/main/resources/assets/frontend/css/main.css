@@ -1,0 +1,212 @@
+/* common css start */
+*
+{
+	margin: 0;
+	padding: 0;
+}
+/* common css end */
+.position_relative
+{
+	position: relative;
+}
+.position_absolute
+{
+	position: absolute;
+}
+
+/*====================hero start====================*/
+.hero-bg 
+{
+	height: 65vh;
+}
+.hero-bg .nav-tabs
+{
+	--bs-nav-tabs-border-width: 0px;
+}
+.hero-bg .nav-tabs .nav-link
+{
+	color: #313541;
+	background: transparent;
+	border: none;
+}
+.hero-bg .nav-tabs .nav-link:hover
+{
+	border-bottom: 3px solid #313541;
+}
+.hero-bg .nav-tabs .nav-link.active
+{
+	color: #0D6EFD;
+	border-bottom: 3px solid #0D6EFD; 
+}
+.hero-bg .flights_span
+{
+	height: 20px;
+	width: 1px;
+}
+.hero-bg .input-group .input-group-text
+{ 
+	background-color: #F8F9FA !important;
+	border: 1px solid rgba(0, 0, 0, .5);
+	border-right: none !important;
+}
+.hero-bg .input-group input
+{ 
+	border: 1px solid rgba(0, 0, 0, .5);
+}
+.hero-bg .convert_btn
+{ 
+	border: 1px solid rgba(0, 0, 0, .5);
+}
+
+.flight_search_bg .convert_btn
+{
+	border: 1px solid rgba(0, 0, 0, .5);
+}
+.flight_search_bg .input-group .input-group-text
+{ 
+	background-color: #F8F9FA !important;
+	border: 1px solid rgba(0, 0, 0, .5);
+	border-right: none !important;
+}
+.flight_search_bg .input-group input
+{ 
+	border: 1px solid rgba(0, 0, 0, .5);
+}
+
+@media only screen and (max-width: 1200px) {
+	.hero-bg 
+	{
+		height: 80vh;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.hero-bg 
+	{
+		height: 95vh;
+	}
+}
+@media only screen and (max-width: 576px) {
+	.hero-bg 
+	{
+		height: 115vh;
+	}
+}
+
+/*====================hero end====================*/
+/*====================agent support start====================*/
+.agent_support_bg
+{
+	visibility: visible;
+	padding: 5rem 0 3rem 0;
+}
+@media only screen and (max-width: 1200px) {
+	.agent_support_bg
+	{
+		padding: 8rem 0 3rem 0;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.agent_support_bg
+	{
+		padding: 15rem 0 3rem 0;
+	}
+}
+@media only screen and (max-width: 575px) {
+	.agent_support_bg
+	{
+		padding: 25rem 0 3rem 0;
+	}
+}
+/*====================agent support end====================*/
+
+
+/*====================seamless_travel start====================*/
+
+.seamless_travel_bg
+{
+	background-image: url('../images/travel.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.seamless_travel_bg_grandient_color
+{
+	background: rgb(13,110,253);
+	background: linear-gradient(90deg, rgba(13,110,253,1) 0%, rgba(13,110,253,1) 50%, rgba(13,110,253,0) 100%); 
+}
+
+/*====================seamless_travel end====================*/
+
+/*====================explore start====================*/
+
+.explore_bg .explore_body_position
+{
+	bottom: -3.5rem;
+	width: 100%;
+}
+.explore_bg .explore_body_position .card-body
+{	
+	background-color: rgb(242, 249, 239);
+}
+
+/*====================explore end====================*/
+
+/*====================message start====================*/
+.dropdown-menu .dropdown_header:hover
+{
+	background-color: transparent;
+}
+/*====================message end====================*/
+
+/*====================profile start====================*/
+
+/*profile sidebar start*/
+.sidebar .navbar-nav .nav-item.active
+{
+	background-color: #0B5ED7;
+}
+.sidebar .nav .nav-item .nav-link
+{
+	transition: all linear .2s;
+}
+.sidebar .nav .nav-item .nav-link.active
+{
+	background-color: #0D6EFD;
+	color: white;
+	border-radius: 5px;
+}
+.sidebar .nav .nav-item .nav-link:hover
+{
+	background-color: #0D6EFD;
+	color: white;
+	border-radius: 5px;
+}
+/*profile sidebar end*/
+
+/*====================profile end====================*/
+
+/*====================booking start====================*/
+
+
+.booking_bg .nav-tabs
+{
+	border: none;
+}
+.booking_bg .nav-tabs .nav-link.active
+{
+	background-color: #0D6EFD;
+	color: white;
+	border-radius: 5px;
+}
+.booking_bg .nav-tabs .nav-link:hover
+{
+	background-color: #0D6EFD;
+	color: white;
+	border-radius: 5px;
+}
+
+/*====================booking end====================*/
+
+
+
+
