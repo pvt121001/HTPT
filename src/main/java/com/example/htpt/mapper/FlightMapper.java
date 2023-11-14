@@ -10,9 +10,9 @@ import org.mapstruct.factory.Mappers;
 public interface FlightMapper {
     FlightMapper MAPPER = Mappers.getMapper(FlightMapper.class);
     @Mapping(source = "planeId", target = "plane.id")
-//    @Mapping(source = "airportId", target = "airports.id")
+    @Mapping(source = "image", target = "plane.airline.image")
     Flight mapToFlight(FlightDto flightDto);
     @Mapping( source = "plane.id", target = "planeId")
-//    @Mapping( source = "airports.id", target = "airportId")
+    @Mapping(source = "plane.airline.image", target = "image")
     FlightDto mapToFlightDto(Flight flight);
 }

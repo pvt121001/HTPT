@@ -24,13 +24,10 @@ public class Flight {
     private String arrivalLocation;
     private String departureTime;
     private String note;
+    private double price;
     @ManyToOne
     @JoinColumn(name = "plane_id")
     private Plane plane;
-//    @ManyToOne
-//    @JoinColumn(name = "airports_id")
-//    private Airports airports;
-//    // tạo 2 đối tượng airports
     @OneToMany(mappedBy = "flight")
-    private List<Ticket> ticketList;
+    private List<Bill> bills;
 }

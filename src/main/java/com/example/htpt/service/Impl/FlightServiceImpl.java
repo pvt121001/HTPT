@@ -8,6 +8,7 @@ import com.example.htpt.service.FlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +44,11 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public void deleteById(String id) {
         flightRepository.deleteById(id);
+    }
+
+    @Override
+    public List<FlightDto> search(LocalDate deparatureDate, LocalDate arrivalDate, String departureLocation, String arrivalLocation) {
+        List<Flight> list = flightRepository.search(deparatureDate, arrivalDate, departureLocation, arrivalLocation);
+        return list.stream().map(FlightMapper.MAPPER::mapToFlightDto).toList();
     }
 }

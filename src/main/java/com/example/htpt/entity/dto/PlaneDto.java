@@ -23,6 +23,7 @@ public class PlaneDto {
     private int totalSeat;
     private String airlineId;
     private String des;
+    private String imageAirline;
     @JsonIgnore
     private List<Flight> flightList;
     @JsonIgnore

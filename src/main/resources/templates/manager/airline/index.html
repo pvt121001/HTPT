@@ -110,7 +110,7 @@
 
         <div class="row">
           <div class="col-md-3">
-            <form th:action="@{/manager/airline/add-airline}" method="POST" th:object="${airlineDto}"  enctype="multipart/form-data">
+            <form th:action="@{/manager/airline/save}" method="POST" th:object="${airlineDto}"  enctype="multipart/form-data">
               <div class="mb-2">
                 <label>Airline ID</label>
                 <input type="text" name="id" class=" form-control" th:field="*{id}">
@@ -121,11 +121,27 @@
                 <input type="text" name="name" class=" form-control" th:field="*{name}">
                 <span class="text-danger"></span>
               </div>
-<!--              <div class="mb-2">-->
-<!--                <label for="">Image</label>-->
-<!--                <input type="file" name="image" class=" form-control">-->
-<!--                <span class="text-danger"></span>-->
-<!--              </div>-->
+              <div class="col-3">
+                <script>
+                  function chooseFile(fileInput) {
+                    if (fileInput.files && fileInput.files[0]) {
+                      var reader = new FileReader();
+
+                      reader.onload = function(e) {
+                        $('#image').attr('src', e.target.result);
+                      }
+                      reader.readAsDataURL(fileInput.files[0]);
+                    }
+                  }
+                </script>
+<!--                <img id="image" th:src="${'/images/' + airline.image  : '/images/noimg.png'}"-->
+<!--                     width="90%">-->
+                <div class="form-group">
+                  <label for="airlineImageHid">Image File</label>
+                  <input type="file" onchange="chooseFile(this)" class="form-control-file" name="imageFile" id="airlineImage" placeholder="Image" aria-describedby="airlineImageHid">
+                  <small id="airlineImageHid" class="form-text text-muted">Airline image is required</small>
+                </div>
+              </div>
               <button type="submit" class="btn btn-dark w-100">Save</button>
             </form>
           </div>
@@ -141,7 +157,7 @@
                   <tr >
                     <th >Airline ID</th>
                     <th >Airline Name</th>
-<!--                    <th>Address</th>-->
+                    <th>Image</th>
                     <th >Action</th>
                   </tr>
                   </thead>
@@ -149,6 +165,10 @@
                     <tr th:each="item : ${listAirline}">
                       <td th:text="${item.id}"></td>
                       <td th:text="${item.name}"></td>
+                      <td >
+                        <img style="width: 115px;height: 60px;" th:src="${item.image != null ? '/manager/airline/images/' + item.image  : '/admin/products/images/noimg.png'}"
+                             alt="" class="image">
+                      </td>
   <!--                    <td th:text="${airline.address}"></td>-->
                     <td >
                       <a th:href="@{'/manager/airline/update/'+ ${item.id}}" class="btn btn-sm btn-primary">Edit</a>

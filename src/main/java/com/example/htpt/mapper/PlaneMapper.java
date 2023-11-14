@@ -10,7 +10,9 @@ import org.mapstruct.factory.Mappers;
 public interface PlaneMapper {
     PlaneMapper MAPPER = Mappers.getMapper(PlaneMapper.class);
     @Mapping(source = "airlineId", target = "airline.id")
+    @Mapping(source = "imageAirline", target = "airline.image")
     Plane mapToPlane(PlaneDto planeDto);
     @Mapping(source = "airline.id", target = "airlineId")
+    @Mapping(source = "airline.image", target = "imageAirline")
     PlaneDto mapToPlanDto(Plane plane);
 }

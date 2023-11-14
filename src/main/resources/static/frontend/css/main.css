@@ -124,7 +124,7 @@
 
 .seamless_travel_bg
 {
-	background-image: url('../images/travel.jpg');
+	background-image: url('../../images/travel.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -132,7 +132,7 @@
 .seamless_travel_bg_grandient_color
 {
 	background: rgb(13,110,253);
-	background: linear-gradient(90deg, rgba(13,110,253,1) 0%, rgba(13,110,253,1) 50%, rgba(13,110,253,0) 100%); 
+	background: linear-gradient(90deg, rgba(13,110,253,1) 0%, rgba(13,110,253,1) 50%, rgba(13,110,253,0) 100%);
 }
 
 /*====================seamless_travel end====================*/

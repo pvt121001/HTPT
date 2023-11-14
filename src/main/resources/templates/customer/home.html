@@ -10,8 +10,8 @@
   <link type="text/css" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<!--  <script type="text/javascript" th:href="@{/frontend/js/jquery-3.7.1.min.js}"></script>-->
-<!--  <script type="text/javascript" th:src="@{http://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js}" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+  <script type="text/javascript" th:href="@{/frontend/js/jquery-3.7.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{http://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js}" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -26,18 +26,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
         <li class="nav-item dropdown">
-          <a class="nav-link" href="">
+          <a class="nav-link" th:href="@{/customer/flight}">
             flights
           </a>
-
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/info}">
+            My Profile
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/booking}">
+            My Booking
+          </a>
         </li>
       </ul>
       <ul class="navbar-nav fw-semibold" role="">
-<!--        <li class="nav-item dropdown d-flex align-items-center">-->
-<!--          <button type="button" class="rounded-circle border border-2 border-secondary" role="button"-->
-<!--                  data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            <img src="{{ asset('assets/frontend/images/user.png') }}" style="width: 30px; height: 30px;"-->
-<!--                 alt="">-->
             <ul th:if="${session.username}" class="navbar__user">
               <li class="navbar__user-item"><a class="nav-link">Welcome <span th:text="${session.username}"></span></a></li>
               <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/logout}">Đăng xuất</a></li>
@@ -46,24 +50,6 @@
               <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/register}">Đăng ký</a></li>
               <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/login}">Đăng nhập</a></li>
             </ul>
-<!--          </button>-->
-<!--          <ul class="dropdown-menu dropdown-menu-end">-->
-<!--            <li><a class="dropdown-item" href="">Profile</a></li>-->
-<!--            <li>-->
-<!--              <hr class="dropdown-divider">-->
-<!--            </li>-->
-<!--            <li><a class="dropdown-item" href="">Logout</a></li>-->
-<!--          </ul>-->
-<!--        </li>-->
-
-<!--        <li class="nav-item">-->
-<!--          <a href=""-->
-<!--             class="text-uppercase btn btn-outline-primary fw-bold d-flex align-items-center"-->
-<!--             style="font-size: 13px;">-->
-<!--            <i class="ri-shield-user-line fs-6"></i> <span class="ps-2">Sign In / Join</span>-->
-<!--          </a>-->
-<!--        </li>-->
-
       </ul>
     </div>
   </div>
@@ -112,7 +98,7 @@
               <div class="tab-content  px-4" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                      aria-labelledby="nav-home-tab" tabindex="0">
-                  <form id="flightForm" action="{{ route('flight') }}" method="GET" class="row">
+                  <form id="flightForm" th:action="@{customer/search}" method="POST" class="row">
                     <div class="col-md-12 d-md-flex fs-6 fw-semibold py-3 px-3">
                       <div class="d-flex justify-content-md-start justify-content-center">
                         <div class="form-check me-4">
@@ -131,25 +117,25 @@
                         </div>
 
                       </div>
-                      <div
-                              class="d-flex align-items-center justify-content-md-start justify-content-center mt-md-0 mt-2">
-                        <div class="form-check me-4">
-                          <input class="form-check-input" type="radio"
-                                 name="flight" id="multi_city" value="multi_city">
-                          <label class="form-check-label" for="multi_city">
-                            Multi City
-                          </label>
-                        </div>
-                        <span class="flights_span bg-secondary"></span>
-                        <select name="" id="" style="appearance: none;"
-                                class="border border-0 bg-transparent ms-4 fs-6 fw-semibold text-primary">
-                          <!-- <option value="">(select)</option> -->
-                          <option value="">Coach</option>
-                          <option value="">Premium Economy</option>
-                          <option value="">Business</option>
-                          <option value="">First</option>
-                        </select>
-                      </div>
+<!--                      <div-->
+<!--                              class="d-flex align-items-center justify-content-md-start justify-content-center mt-md-0 mt-2">-->
+<!--                        <div class="form-check me-4">-->
+<!--                          <input class="form-check-input" type="radio"-->
+<!--                                 name="flight" id="multi_city" value="multi_city">-->
+<!--                          <label class="form-check-label" for="multi_city">-->
+<!--                            Multi City-->
+<!--                          </label>-->
+<!--                        </div>-->
+<!--                        <span class="flights_span bg-secondary"></span>-->
+<!--                        <select name="" id="" style="appearance: none;"-->
+<!--                                class="border border-0 bg-transparent ms-4 fs-6 fw-semibold text-primary">-->
+<!--                          &lt;!&ndash; <option value="">(select)</option> &ndash;&gt;-->
+<!--                          <option value="">Coach</option>-->
+<!--                          <option value="">Premium Economy</option>-->
+<!--                          <option value="">Business</option>-->
+<!--                          <option value="">First</option>-->
+<!--                        </select>-->
+<!--                      </div>-->
                     </div>
 
                     <div class="col-md-12 pt-2">
@@ -157,10 +143,9 @@
                         <div id="convertBox"
                              class="col-xl-5 col-sm-12 d-sm-flex position-relative mb-xl-0 mb-3">
                           <div class="input-group position-relative">
-                                                            <span class="input-group-text ms-1 bg-light ps-3 pe-0"
-                                                                 >
-                                                                <i class="ri-map-pin-fill fs-4 text-secondary"></i>
-                                                            </span>
+<!--                            <span class="input-group-text ms-1 bg-light ps-3 pe-0>-->
+<!--                                 <i class="ri-map-pin-fill fs-4 text-secondary"></i>-->
+<!--                            </span>-->
                             <input type="text" id="departureInputField"
                                    class="form-control py-xl-2 py-4 rounded-end border-start-0 text-muted fs-5 fw-semibold focus-ring z-0 bg-light"
                                    placeholder="From Where?"
@@ -174,11 +159,11 @@
                             </ul>
                           </div>
                           <div class="input-group mt-sm-0 mt-1">
-                                                            <span
-                                                                    class="input-group-text ms-1 bg-light ps-4 pe-0 position-relative"
-                                                                   >
-                                                                <i class="ri-map-pin-fill fs-4 text-secondary "></i>
-                                                            </span>
+                            <span
+                                    class="input-group-text ms-1 bg-light ps-4 pe-0 position-relative"
+                                   >
+                                <i class="ri-map-pin-fill fs-4 text-secondary "></i>
+                            </span>
                             <input type="search" id="arrialInputField"
                                    class="form-control py-xl-2 py-4 rounded-end focus-ring border-start-0 text-muted fs-5 fw-semibold bg-light"
 
@@ -188,10 +173,9 @@
                             <ul id="whereLocation"
                                 class="card card-body position-absolute rounded left-0 d-none z-3"
                                 style="margin: 4.5rem 0 0 0;">
-
                             </ul>
                           </div>
-                          <button type="button" id="convertBtn" onclick="changeLocation()"
+                          <button type="button" id="convertBtn"
                                   class="bg-light position-absolute start-50 top-50 translate-middle rounded-circle fs-4 text-primary py-0 px-2 z-3 convert_btn">
                             <i class="ri-arrow-left-right-line d-sm-block d-none"></i>
                             <i class="ri-arrow-up-down-line d-sm-none d-block"></i>
@@ -205,20 +189,18 @@
                                  style="cursor: pointer;">
                               <input type="hidden" id="departureDateInput"
                                      name="departure_date[]">
-                              <div
-                                      class="bg-light border border-1 border-secondary rounded px-2 d-flex align-items-center py-2 w-100 trigger">
-                                                                    <span class="ps-1 pe-3 fs-4">
-                                                                        <i class="ri-calendar-todo-fill"></i>
-                                                                    </span>
+                              <div class="bg-light border border-1 border-secondary rounded px-2 d-flex align-items-center py-2 w-100 trigger">
+                                <span class="ps-1 pe-3 fs-4">
+                                    <i class="ri-calendar-todo-fill"></i>
+                                </span>
                                 <div id="departureDateIsNotEmpty" class="d-none">
-                                                                        <span class="text-dark fs-6 fw-bold"><span
-                                                                                id="departure_mounth"></span> <span
-                                                                                id="departure_day"></span></span><br>
+                                  <span class="text-dark fs-6 fw-bold"><span
+                                    id="departure_mounth"></span> <span
+                                    id="departure_day"></span></span><br>
                                   <span class="text-muted" id="departure_year"></span>
                                 </div>
                                 <div id="departureDateEmpty">
-                                                                        <span
-                                                                                class="fs-6 fw-normal text-muted">Depart</span><br>
+                                  <span class="fs-6 fw-normal text-muted">Depart</span><br>
                                   <span class="fs-6 fw-normal text-muted">Date</span>
                                 </div>
                               </div>
@@ -230,19 +212,22 @@
 
                               <input type="hidden" id="arrivalDateInput"
                                      name="arrival_date">
-                              <div
-                                      class="bg-light border border-1 border-secondary rounded px-2 d-flex align-items-center py-2">
-                                                                    <span class="ps-1 pe-3 fs-4"><i
-                                                                            class="ri-calendar-todo-fill"></i></span>
+                              <div class="bg-light border border-1 border-secondary rounded px-2 d-flex align-items-center py-2">
+                                <span class="ps-1 pe-3 fs-4"><i
+                                        class="ri-calendar-todo-fill"></i></span>
                                 <div id="arrivalDateIsNotEmpty" class="d-none">
-                                                                        <span class="text-dark fs-6 fw-bold"><span
-                                                                                id="arrival_month"></span> <span
-                                                                                id="arrival_day"></span></span><br>
+                                  <span class="text-dark fs-6 fw-bold">
+                                    <span
+                                          id="arrival_month"></span>
+                                    <span
+                                          id="arrival_day"></span>
+                                  </span>
+                                  <br>
                                   <span class="text-muted" id="arrival_year"></span>
                                 </div>
                                 <div id="arrivalDateEmpty">
-                                                                        <span
-                                                                                class="text-muted fs-6 fw-normal">Return</span><br>
+                                <span
+                                        class="text-muted fs-6 fw-normal">Return</span><br>
                                   <span class="text-muted fs-6 fw-normal"
                                         >Date</span>
                                 </div>
@@ -254,61 +239,12 @@
                               <input type="hidden" id="personInput" name="seats">
                               <div class="bg-light border border-1 border-secondary rounded px-2 d-flex align-items-center h-100 py-md-0 py-2"
                                    onclick="selectPerson()">
-                                                                    <span class="ps-1 pe-3 fs-4"><i
-                                                                            class="ri-user-fill"></i></span>
+                                    <span class="ps-1 pe-3 fs-4"><i
+                                            class="ri-user-fill"></i></span>
                                 <div class="">
-                                                                        <span class="text-dark fs-6 fw-bold"
-                                                                              id="person">0</span><br>
+                                    <span class="text-dark fs-6 fw-bold"
+                                          id="person">0</span><br>
                                   <span class="text-muted">Travel</span>
-                                </div>
-                              </div>
-                              <div id="PersonBox"
-                                   class="card card-body position-absolute end-0 me-3 mt-2 d-none">
-                                <div class="d-flex align-items-center mb-2">
-                                  <div class="me-auto pe-4">Adult</div>
-                                  <div class="d-flex">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            onclick="AdultPerson('minus')">-</button>
-                                    <input type="text" value="1"
-                                           id="travelPerson"
-                                           class="travelPerson text-center">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            onclick="AdultPerson('plus')">+</button>
-                                  </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                  <div class="me-auto pe-4">Senior</div>
-                                  <div class="d-flex">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            id="SeniorPersonMinus"
-                                            onclick="SeniorPerson('minus', 'SeniorPersonMinus')">-</button>
-                                    <input type="text" value="0"
-                                           id="travelSenior"
-                                           class="travelSenior text-center">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            id="SeniorPersonPlus"
-                                            onclick="SeniorPerson('plus', 'SeniorPersonPlus')">+</button>
-                                  </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                  <div class="me-auto pe-4">Child</div>
-                                  <div class="d-flex">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            id="ChildPersonMinus"
-                                            onclick="ChildPerson('minus', 'ChildPersonMinus')">-</button>
-                                    <input type="text" value="0"
-                                           id="travelChild"
-                                           class="travelChild text-center">
-                                    <button type="button"
-                                            class="btn btn-sm btn-light fs-6 fw-blod"
-                                            id="ChildPersonPlus"
-                                            onclick="ChildPerson('plus', 'ChildPersonPlus')">+</button>
-                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -327,10 +263,10 @@
                       <div class="row">
                         <div class="col-xl-5 col-sm-12 d-sm-flex">
                           <div class="input-group position-relative">
-                                                            <span class="input-group-text ms-1 bg-light ps-3 pe-0"
-                                                                  >
-                                                                <i class="ri-map-pin-fill fs-4 text-secondary"></i>
-                                                            </span>
+                            <span class="input-group-text ms-1 bg-light ps-3 pe-0"
+                                  >
+                                <i class="ri-map-pin-fill fs-4 text-secondary"></i>
+                            </span>
                             <input type="text"
                                    class="form-control py-xl-2 py-4 rounded-end border-start-0 text-muted fs-5 fw-semibold focus-ring z-0 bg-light"
                                    placeholder="From Where?"
@@ -343,10 +279,10 @@
                             </div>
                           </div>
                           <div class="input-group mt-sm-0 mt-1 position-relative">
-                                                            <span class="input-group-text ms-1 bg-light ps-4 pe-0"
-                                                                  id="basic-addon1">
-                                                                <i class="ri-map-pin-fill fs-4 text-secondary "></i>
-                                                            </span>
+                            <span class="input-group-text ms-1 bg-light ps-4 pe-0"
+                                  id="basic-addon1">
+                                <i class="ri-map-pin-fill fs-4 text-secondary "></i>
+                            </span>
                             <input type="text"
                                    class="form-control py-xl-2 py-4 rounded-end focus-ring border-start-0 text-muted fs-5 fw-semibold bg-light"
 
@@ -489,33 +425,13 @@
       </div>
     </div>
   </div>
-
-  <div class="modal animated zoomIn" id="arrival_date-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="modal-title" id="exampleModalLabel">Arrival Date</h6>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div class="row">
-              <form id="arrivalDateForm" class="col-12 p-3">
-                <input type="date" onchange="arrivalDate(event)" class="form-control">
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button id="arrival-modal-close" onclick="closeArrivalDate()" class="btn btn-sm btn-danger" data-bs-dismiss="modal"
-                  aria-label="Close">Close</button>
-          <button id="save-btn" onclick="arrivalDateSet()" class="btn btn-sm  btn-success">Set Date</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="seamless_travel_bg mt-5">
-    <div class="seamless_travel_bg_grandient_color">
+    <div class="seamless_travel_bg_grandient_color" style="
+    background: rgb(13,110,253);
+    background: linear-gradient(90deg, rgba(13,110,253,1) 0%, rgba(13,110,253,1) 50%, rgba(13,110,253,0) 100%);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;">
       <div class="container py-5">
         <div class="row">
           <div class="col-md-12 py-5 text-light">
@@ -533,345 +449,6 @@
     </div>
   </div>
 
-
-
-<!--  <script>-->
-<!--    let formLocation = $("#formLocation"),-->
-<!--            whereLocation = $("#whereLocation");-->
-
-
-<!--    var departureDateValue,-->
-<!--            departureMounthValue,-->
-<!--            departureDayValue,-->
-<!--            departureYearValue,-->
-<!--            arrivalDateValue,-->
-<!--            arrivalMounthValue,-->
-<!--            arrivalDayValue,-->
-<!--            arrivalYearValue;-->
-
-
-<!--    let flightForm = document.getElementById("flightForm"),-->
-<!--            departure_mounth = document.getElementById("departure_mounth"),-->
-<!--            departure_day = document.getElementById("departure_day"),-->
-<!--            departure_year = document.getElementById("departure_year"),-->
-<!--            arrival_month = document.getElementById("arrival_month"),-->
-<!--            arrival_day = document.getElementById("arrival_day"),-->
-<!--            arrival_year = document.getElementById("arrival_year"),-->
-<!--            departureInputField = document.getElementById("departureInputField"),-->
-<!--            departureDateInput = document.getElementById("departureDateInput"),-->
-<!--            departureDateIsNotEmpty = document.getElementById("departureDateIsNotEmpty"),-->
-<!--            departureDateEmpty = document.getElementById("departureDateEmpty"),-->
-<!--            arrialInputField = document.getElementById("arrialInputField"),-->
-<!--            arrivalDateInput = document.getElementById("arrivalDateInput"),-->
-<!--            arrivalDateIsNotEmpty = document.getElementById("arrivalDateIsNotEmpty"),-->
-<!--            arrivalDateEmpty = document.getElementById("arrivalDateEmpty");-->
-
-<!--    $(document).ready(function() {-->
-<!--      $("#departureInputField").on("keyup", async function() {-->
-<!--        let departureInputFieldValue = $(this).val();-->
-<!--        let response = await axios.post('/get-location', {-->
-<!--          departureLocation: departureInputFieldValue-->
-<!--        });-->
-<!--        if (response.data !== "not found") {-->
-<!--          formLocation.empty();-->
-<!--          formLocation.removeClass("d-none");-->
-<!--          if (response.data.length > 0) {-->
-<!--            response.data.forEach((item, index) => {-->
-<!--              let row = `<li class="list-unstyled border border-0 px-1 py-2" onclick="selectDepartureLocation(${item.id})" style="cursor: pointer;">-->
-<!--                                        <i class="ri-plane-line"></i> <span>${item.name}</span> (<span>${item.short_name}</span>)-->
-<!--                                        <span>${item.location}</span>-->
-<!--                                    </li>`;-->
-<!--              formLocation.append(row);-->
-<!--            });-->
-<!--          } else {-->
-<!--            formLocation.addClass("d-none");-->
-<!--          }-->
-<!--        } else {-->
-<!--          formLocation.empty();-->
-<!--          formLocation.removeClass("d-none");-->
-<!--          let row = `<li class="list-unstyled border border-0 px-1 py-2" style="cursor: pointer;">-->
-<!--                                        <span class="">${response.data}</span>-->
-<!--                                    </li>`;-->
-<!--          formLocation.append(row);-->
-<!--        }-->
-<!--      });-->
-
-
-<!--      $("#arrialInputField").on("keyup", async function() {-->
-<!--        let arrialInputFieldValue = $(this).val();-->
-<!--        let response = await axios.post("/get-location", {-->
-<!--          arrivelLoaction: arrialInputFieldValue-->
-<!--        });-->
-<!--        if (response.data !== "not found") {-->
-<!--          whereLocation.empty();-->
-<!--          whereLocation.removeClass("d-none");-->
-<!--          if (response.data.length > 0) {-->
-<!--            response.data.forEach((item, index) => {-->
-<!--              let row = `<li class="list-unstyled border border-0 px-1 py-2" style="cursor: pointer;" onclick="selectArrivalLocation(${item.id})">-->
-<!--                                        <i class="ri-plane-line"></i> <span>${item.name}</span> (<span>${item.short_name}</span>)-->
-<!--                                        <span>${item.location}</span>-->
-<!--                                    </li>`;-->
-<!--              whereLocation.append(row);-->
-<!--            });-->
-<!--          } else {-->
-<!--            whereLocation.addClass("d-none");-->
-<!--          }-->
-<!--        } else {-->
-<!--          whereLocation.empty();-->
-<!--          whereLocation.removeClass("d-none");-->
-<!--          let row = `<li class="list-unstyled border border-0 px-1 py-2" style="cursor: pointer;">-->
-<!--                                        <span class="">${response.data}</span>-->
-<!--                                    </li>`;-->
-<!--          whereLocation.append(row);-->
-<!--        }-->
-<!--      });-->
-<!--    });-->
-
-<!--    let departure_location_id = document.getElementById("departure_location_id");-->
-<!--    let arrival_location_id = document.getElementById("arrival_location_id");-->
-<!--    let departureId,-->
-<!--            arrivalId,-->
-<!--            departureName,-->
-<!--            arrivalName;-->
-
-<!--    async function selectDepartureLocation(id) {-->
-<!--      let response = await axios.get("/get-location-by/" + id);-->
-<!--      departure_location_id.value = response.data.id;-->
-<!--      departureId = response.data.id;-->
-<!--      departureInputField.value = response.data.name;-->
-<!--      departureName = response.data.name;-->
-<!--      formLocation.addClass("d-none");-->
-<!--    }-->
-<!--    async function selectArrivalLocation(id) {-->
-<!--      let response = await axios.get("/get-location-by/" + id);-->
-<!--      arrival_location_id.value = response.data.id;-->
-<!--      arrivalId = response.data.id-->
-<!--      arrialInputField.value = response.data.name;-->
-<!--      arrivalName = response.data.name;-->
-<!--      whereLocation.addClass("d-none");-->
-<!--    }-->
-<!--    let change = false;-->
-<!--    async function changeLocation() {-->
-<!--      if (change === false) {-->
-<!--        departure_location_id.value = arrivalId;-->
-<!--        departureInputField.value = arrivalName;-->
-<!--        arrival_location_id.value = departureId;-->
-<!--        arrialInputField.value = departureName;-->
-<!--        change = true;-->
-<!--      } else {-->
-<!--        departureInputField.value = departureName;-->
-<!--        departure_location_id.value = departureId;-->
-<!--        arrival_location_id.value = arrivalId;-->
-<!--        arrialInputField.value = arrivalName;-->
-<!--        change = false;-->
-<!--      }-->
-<!--      // let response = await axios.get("/get-location-by/" + departureId);-->
-<!--      // console.log(response);-->
-<!--    }-->
-
-
-
-
-<!--    flightForm.reset();-->
-
-<!--    function departureDate(event) {-->
-
-<!--      var selectedDate = new Date(event.target.value);-->
-<!--      var options = {-->
-<!--        month: 'short'-->
-<!--      };-->
-
-
-<!--      var monthName = selectedDate.toLocaleString(undefined, options);-->
-<!--      var day = selectedDate.getDate();-->
-<!--      var year = selectedDate.getFullYear();-->
-
-<!--      departureDateValue = event.target.value;-->
-<!--      departureMounthValue = monthName;-->
-<!--      departureDayValue = day;-->
-<!--      departureYearValue = year;-->
-
-<!--    }-->
-
-<!--    function departureDateSet() {-->
-<!--      let departureDateForm = document.getElementById("departureDateForm");-->
-<!--      let modalClose = document.getElementById("modal-close");-->
-<!--      departureDateEmpty.classList.add("d-none");-->
-<!--      departureDateIsNotEmpty.classList.remove("d-none");-->
-
-<!--      departureDateInput.value = departureDateValue;-->
-<!--      departure_mounth.innerText = departureMounthValue;-->
-<!--      departure_day.innerText = departureDayValue;-->
-<!--      departure_year.innerText = departureYearValue;-->
-<!--      departureDateForm.reset();-->
-<!--      modalClose.click();-->
-<!--    }-->
-
-<!--    function closeDepartrueDate() {-->
-<!--      let departureDateForm = document.getElementById("departureDateForm");-->
-<!--      let modalClose = document.getElementById("modal-close");-->
-<!--      departureDateForm.reset();-->
-<!--      modalClose.click();-->
-<!--    }-->
-
-
-<!--    //arrival-->
-<!--    function arrivalDate(event) {-->
-<!--      var selectedDate = new Date(event.target.value);-->
-<!--      var options = {-->
-<!--        month: 'short'-->
-<!--      };-->
-
-
-<!--      var monthName = selectedDate.toLocaleString(undefined, options);-->
-<!--      var day = selectedDate.getDate();-->
-<!--      var year = selectedDate.getFullYear();-->
-
-<!--      arrivalDateValue = event.target.value;-->
-<!--      arrivalMounthValue = monthName;-->
-<!--      arrivalDayValue = day;-->
-<!--      arrivalYearValue = year;-->
-<!--    }-->
-
-<!--    function arrivalDateSet() {-->
-<!--      let arrivalDateForm = document.getElementById("arrivalDateForm");-->
-<!--      let modalClose = document.getElementById("arrival-modal-close");-->
-<!--      arrivalDateEmpty.classList.add("d-none");-->
-<!--      arrivalDateIsNotEmpty.classList.remove("d-none");-->
-
-<!--      arrivalDateInput.value = arrivalDateValue;-->
-<!--      arrival_month.innerText = arrivalMounthValue;-->
-<!--      arrival_day.innerText = arrivalDayValue;-->
-<!--      arrival_year.innerText = arrivalYearValue;-->
-
-<!--      arrivalDateForm.reset();-->
-<!--      modalClose.click();-->
-<!--    }-->
-
-<!--    function closeArrivalDate() {-->
-<!--      let arrivalDateForm = document.getElementById("arrivalDateForm");-->
-<!--      let modalClose = document.getElementById("arrival-modal-close");-->
-<!--      arrivalDateForm.reset();-->
-<!--      modalClose.click();-->
-<!--    }-->
-
-
-<!--    // get travel person-->
-<!--    let person = document.getElementById("person"),-->
-<!--            personInput = document.getElementById("personInput"),-->
-<!--            travelPerson = document.getElementById("travelPerson"),-->
-<!--            travelSenior = document.getElementById("travelSenior"),-->
-<!--            travelChild = document.getElementById("travelChild"),-->
-<!--            PersonBox = document.getElementById("PersonBox");-->
-
-<!--    function getTravelPerson() {-->
-<!--      personInput.value = Number(travelPerson.value) + Number(travelSenior.value) + Number(travelChild.value);-->
-<!--      person.innerText = Number(travelPerson.value) + Number(travelSenior.value) + Number(travelChild.value);-->
-<!--    }-->
-<!--    getTravelPerson()-->
-
-<!--    function AdultPerson(AdultPersonType) {-->
-<!--      if (AdultPersonType === 'minus') {-->
-<!--        if (travelPerson.value > 1) {-->
-<!--          travelPerson.value -= 1;-->
-<!--          getTravelPerson()-->
-<!--        }-->
-<!--      } else {-->
-<!--        travelPerson.value = Number(travelPerson.value) + 1;-->
-<!--        getTravelPerson()-->
-<!--      }-->
-<!--    }-->
-
-<!--    function SeniorPerson(SeniorPersonType, SeniorPersonId) {-->
-<!--      let SeniorPerson = document.getElementById(`${SeniorPersonId}`);-->
-
-<!--      if (SeniorPersonType === 'minus') {-->
-<!--        if (travelSenior.value > 0) {-->
-<!--          travelSenior.value -= 1;-->
-<!--          getTravelPerson()-->
-<!--        }-->
-<!--        if (travelSenior.value < 0) {-->
-<!--          SeniorPerson.classList.add("disabled");-->
-<!--        }-->
-<!--      } else {-->
-<!--        travelSenior.value = Number(travelSenior.value) + 1;-->
-<!--        getTravelPerson()-->
-<!--      }-->
-<!--    }-->
-
-<!--    function ChildPerson(SeniorPersonType, ChlidPersonId) {-->
-<!--      let PersonChlid = document.getElementById(`${ChlidPersonId}`);-->
-
-<!--      if (SeniorPersonType === 'minus') {-->
-<!--        if (travelChild.value > 0) {-->
-<!--          travelChild.value -= 1;-->
-<!--          getTravelPerson()-->
-<!--        }-->
-<!--        if (travelChild.value < 0) {-->
-<!--          PersonChlid.classList.add("disabled")-->
-<!--        }-->
-<!--      } else {-->
-<!--        travelChild.value = Number(travelChild.value) + 1;-->
-<!--        getTravelPerson()-->
-<!--      }-->
-<!--    }-->
-
-<!--    function selectPerson() {-->
-<!--      PersonBox.classList.toggle("d-none");-->
-<!--    }-->
-
-
-
-<!--    let departureDateSecondInput = document.getElementById("departureDateSecondInput"),-->
-<!--            departureDateSecondIsNotEmpty = document.getElementById("departureDateSecondIsNotEmpty"),-->
-<!--            departureDateSecondIsEmpty = document.getElementById("departureDateSecondIsEmpty"),-->
-<!--            departureDateSecondMonth = document.getElementById("departureDateSecondMonth"),-->
-<!--            departureDateSecondDay = document.getElementById("departureDateSecondDay"),-->
-<!--            departureDateSecondYear = document.getElementById("departureDateSecondYear");-->
-
-<!--    let monthValue,-->
-<!--            dayValue,-->
-<!--            yearValue,-->
-<!--            dateValue;-->
-
-
-
-
-<!--    function departureSecondDate(event) {-->
-<!--      var selectedDate = new Date(event.target.value);-->
-<!--      var options = {-->
-<!--        month: 'short'-->
-<!--      };-->
-
-<!--      var monthName = selectedDate.toLocaleString(undefined, options);-->
-<!--      var day = selectedDate.getDate();-->
-<!--      var year = selectedDate.getFullYear();-->
-
-<!--      dateValue = event.target.value;-->
-<!--      monthValue = monthName;-->
-<!--      dayValue = day;-->
-<!--      yearValue = year;-->
-<!--    }-->
-
-
-<!--    function departureSecondDateSet() {-->
-<!--      let departSecondModalClose = document.getElementById("departSecondModalClose");-->
-<!--      departureDateSecondIsEmpty.classList.add('d-none');-->
-<!--      departureDateSecondIsNotEmpty.classList.remove('d-none');-->
-<!--      departureDateSecondMonth.innerText = monthValue;-->
-<!--      departureDateSecondDay.innerText = dayValue;-->
-<!--      departureDateSecondYear.innerText = yearValue;-->
-<!--      departureDateSecondInput.value = dateValue;-->
-<!--      departSecondModalClose.click()-->
-<!--    }-->
-
-<!--    function closeDepartrueSecondDate()-->
-<!--    {-->
-<!--      let departSecondModalClose = document.getElementById("departSecondModalClose");-->
-<!--      departSecondModalClose.click()-->
-<!--    }-->
-<!--  </script>-->
-
 </main>
 <!-- =========================footer start =========================-->
 <footer class="bg-primary">
@@ -884,8 +461,8 @@
   </div>
 </footer>
 
-<!--<script type="text/javascript" th:src="@{/frontend/js/bootstrap.bundle.min.js}"></script>-->
-<!--<script type="text/javascript" th:src="@{/frontend/js/main.js}"></script>-->
+<script type="text/javascript" th:src="@{/frontend/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/frontend/js/main.js}"></script>
 
 </body>
 

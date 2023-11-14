@@ -5,6 +5,8 @@ import com.example.htpt.share.request.ChangePasswordRequest;
 import com.example.htpt.share.request.LoginRequest;
 import com.example.htpt.share.request.RegisterRequest;
 import com.example.htpt.service.UserService;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -42,8 +44,7 @@ public class AuthenticateController {
             modelAndView.setViewName("login");
             modelAndView.addObject("messageError", "Invalid username or password!");
         } else {
-            modelAndView.setViewName("home");
-            session.setAttribute("username", userDto.getUsername());
+            modelAndView.setViewName("customer/home");
         }
         return modelAndView;
     }
@@ -60,7 +61,7 @@ public class AuthenticateController {
             modelAndView.addObject("errors", result.getAllErrors());
         }
         UserDto newUser = userService.register(dto);
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("/customer/home");
         session.setAttribute("username", newUser.getUsername());
         return modelAndView;
     }

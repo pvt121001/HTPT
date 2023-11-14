@@ -7,6 +7,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
 public class AirlineDto {
     private String id;
     private String name;
+    private String image;
+    private MultipartFile imageFile;
     @JsonIgnore
     private List<Plane> planeList;
 }

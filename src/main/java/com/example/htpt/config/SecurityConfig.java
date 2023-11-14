@@ -2,6 +2,10 @@ package com.example.htpt.config;
 
 import com.example.htpt.entity.enums.Role;
 import com.example.htpt.service.CustomUserDetailService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.OnError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,10 +22,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import java.io.IOException;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private final HttpSession session;
     private final CustomUserDetailService customUserDetailService;
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler() {
@@ -64,8 +72,9 @@ public class SecurityConfig {
                             .loginProcessingUrl("/auth/login")
                             .defaultSuccessUrl("/", true)
                             .successHandler((request, response, authentication) -> {
-                                // Custom success URLs based on role
                                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                                session.setAttribute("username", userDetails.getUsername());
+                                // Custom success URLs based on role
                                 for (GrantedAuthority authority : userDetails.getAuthorities()) {
                                     if (authority.getAuthority().equals(Role.CUSTOMER.name())) {
                                         response.sendRedirect("/customer/home");

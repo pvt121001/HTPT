@@ -1,18 +1,17 @@
 package com.example.htpt.controller.ManagerController;
 
 import com.example.htpt.entity.Airports;
-import com.example.htpt.entity.Flight;
 import com.example.htpt.entity.Plane;
+import com.example.htpt.entity.dto.AirlineDto;
 import com.example.htpt.entity.dto.AirportDto;
 import com.example.htpt.entity.dto.FlightDto;
 import com.example.htpt.entity.dto.PlaneDto;
-import com.example.htpt.mapper.AirportMapper;
 import com.example.htpt.mapper.PlaneMapper;
+import com.example.htpt.service.AirlineService;
 import com.example.htpt.service.AirportService;
 import com.example.htpt.service.FlightService;
 import com.example.htpt.service.PlaneService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -34,16 +29,22 @@ public class FlightController {
     private final FlightService flightService;
     private final PlaneService planeService;
     private final AirportService airportService;
+    private final AirlineService airlineService;
     @ModelAttribute("listPlane")
     public List<PlaneDto> getAllPlane(){
         return planeService.getAllPlane();
+    }
+
+    @ModelAttribute("listAirline")
+    public List<AirlineDto> getAllAirline(){
+        return airlineService.getAllAirline();
     }
     @ModelAttribute("listAirport")
     public List<AirportDto> getAllAirport(){
         return airportService.getAllAirport();
     }
     @GetMapping("")
-    public String getALlFlight(Model model){
+    public String getAllFlight(Model model) {
         List<FlightDto> list = flightService.getAllFlight();
         model.addAttribute("listFlight", list);
         return "manager/flight/index";

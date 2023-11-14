@@ -1,8 +1,7 @@
 package com.example.htpt.entity.dto;
 
-import com.example.htpt.entity.Airports;
+import com.example.htpt.entity.Bill;
 import com.example.htpt.entity.Plane;
-import com.example.htpt.entity.Ticket;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,12 +29,11 @@ public class FlightDto {
     private String arrivalLocation;
     private String departureTime;
     private String note;
-
     private String planeId;
+    private String image;
+    private double price;
     @JsonIgnore
     private Plane plane;
-//    @JsonIgnore
-//    private Airports airports;
     @JsonIgnore
-    private List<Ticket> ticketList;
+    private List<Bill> bills;
 }

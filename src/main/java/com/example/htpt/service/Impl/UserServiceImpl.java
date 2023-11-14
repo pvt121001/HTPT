@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 email(request.getEmail()).
                 dob(request.getDob()).
                 gender(request.getGender()).
-                role(Role.MANAGER).
+                role(Role.CUSTOMER).
                 phoneNumber(request.getPhoneNumber()).
                 address(request.getAddress()).
                 build();

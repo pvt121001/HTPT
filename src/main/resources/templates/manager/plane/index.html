@@ -137,6 +137,7 @@
                       <th>Tổng</th>
                       <th>Mô tả</th>
                       <th>Hãng máy bay</th>
+                      <th>Image Airline</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -150,6 +151,10 @@
                       <td th:text="${item.totalSeat}"></td>
                       <td th:text="${item.des}"></td>
                       <td th:text="${item.airlineId}"></td>
+                      <td >
+                        <img style="width: 115px;height: 60px;" th:src="${item.getImageAirline() != null ? '/manager/airline/images/' + item.getImageAirline()  : '/admin/products/images/noimg.png'}"
+                             alt="" class="image">
+                      </td>
                       <td>
                         <a th:href="@{'/manager/plane/update/' + ${item.id}}"
                            class="btn btn-sm btn-primary">Edit</a>
