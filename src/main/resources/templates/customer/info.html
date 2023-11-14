@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Ticket Booking </title>
+  <link rel="stylesheet" th:href="@{/frontend/css/bootstrap.min.css}" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/frontend/css/main.css}" type="text/css">
+
+  <script th:src="@{/frontend/js/jquery-3.7.1.min.js}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary py-2">
+  <div class="container">
+    <a class="navbar-brand text-primary fw-bolder fs-4" href="">Cheap Air</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/flight}">
+            flights
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/info}">
+            My Profile
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/mybooking}">
+            My Booking
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav fw-semibold" role="">
+        <li class="nav-item dropdown d-flex align-items-center">
+          <button type="button" class="rounded-circle border border-2 border-secondary" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            <img th:src="@{ asset('/images/user.png') }" style="width: 30px; height: 30px;"
+                 alt="">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="">Logout</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href=""
+             class="text-uppercase btn btn-outline-primary fw-bold d-flex align-items-center"
+             style="font-size: 13px;">
+            <i class="ri-shield-user-line fs-6"></i> <span class="ps-2">Sign In / Join</span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- navbar end -->
+<main>
+
+  <div class="container py-5 profile_bg">
+    <div class="row">
+      <div class="col-md-3 mb-sm-0 mb-4 sidebar">
+        <div class="card px-3 py-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" th:href="@{/customer/info}">
+                <i class="ri-file-user-fill fs-5"></i> My Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="">
+                <i class="ri-book-mark-line fs-5"></i> My Booking
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="">
+                <i class="ri-lock-password-line fs-5"></i> Change Password
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- profile info start -->
+      <div class="col-md-9" th:object="${userDto}">
+        <div id="info" class="card px-3 pt-3 pb-5">
+          <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+              <img th:src="@{/images/user.png}" style="width: 150px; height: 150px;" alt="">
+              <h5 class="ps-3 fs-5 fw-bold" th:text="${userDto.username}"></h5>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+              <button type="button" class="btn btn-sm btn-outline-primary px-3 rounded-5"
+                      onclick="EditProfile()">Edit</button>
+            </div>
+            <div class="col-md-12 pt-3 ps-4">
+              <h4 class="fs-4 fw-semibold">Personal Details</h4>
+              <p class=" text-muted fs-6 fw-normal"><i class="ri-question-line fs-6"></i> As mentioned on your
+                passport or government approved IDs</p>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="card px-5 py-4">
+                <h4 class="fs-4 fw-semibold">Basic Info</h4>
+                <div class="row py-2 px-3">
+                  <div class="col-md-6 ps-2 pb-2"><span class="fs-6 fw-normal" >Name</span></div>
+                  <div class="col-md-6 pb-2"><span class="text-muted" th:text="${userDto.username}"></span></div>
+                  <hr>
+                  <div class="col-md-6 ps-2 pb-2"><span>Birthday</span></div>
+                  <div class="col-md-6 pb-2 " th:text="${userDto.dob}"><span class="text-muted">---</span></div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="card px-5 py-4">
+                <h4 class="fs-4 fw-semibold">Contact Info</h4>
+                <div class="row py-2 px-3">
+                  <div class="col-md-6 ps-2 pb-2"><span>Email Address</span></div>
+                  <div class="col-md-6 pb-2"><span class="text-muted" th:text="${userDto.email}"></span></div>
+                  <hr>
+                  <div class="col-md-6 ps-2 pb-2"><span>Phone Number</span></div>
+                  <div class="col-md-6 pb-2" th:text="${userDto.phoneNumber}"><span class="text-muted">---</span></div>
+                  <hr>
+                  <div class="col-md-6 ps-2 pb-2"><span>Address</span></div>
+                  <div class="col-md-6 pb-2" th:text="${userDto.address}"><span class="text-muted">---</span></div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="card px-5 py-4">
+                <h4 class="fs-4 fw-semibold">Passport Info</h4>
+                <div class="row py-2 px-3">
+                  <div class="col-md-6 ps-2 pb-2"><span>Passport Number</span></div>
+                  <div class="col-md-6 pb-2"><span class="text-muted">xxxxxx</span></div>
+                  <hr>
+                  <div class="col-md-6 ps-2 pb-2"><span>Passport Expiry Date</span></div>
+                  <div class="col-md-6 pb-2"><span class="text-muted">---</span></div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="infoCardEdit" class="card px-3 pt-3 pb-5 d-none">
+          <div class="row">
+            <div class="col-md-6">
+              <div class=" d-sm-flex align-items-sm-center text-sm-start text-center">
+                <img src="{{ url('assets/frontend/images/user.png') }}" style="width: 150px; height: 150px;" alt="">
+                <div class="px-4">
+                  <h5 class="fs-5 fw-bold py-sm-0 py-2">anwar.saeed656@gmail.com</h5>
+                  <button type="button" class="btn btn-outline-primary px-4">Upload</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+              <button type="button" class="btn btn-sm btn-outline-danger px-3 rounded-5"
+                      onclick="Cancel()">Cancel</button>
+            </div>
+            <div class="col-md-12 pt-3 ps-4">
+              <h4 class="fs-4 fw-semibold">Personal Details</h4>
+              <p class=" text-muted fs-6 fw-normal"><i class="ri-question-line fs-6"></i> As mentioned on your
+                passport or government approved IDs</p>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="row py-2 px-3">
+                <div class="col-md-6 ps-2 pb-2">
+                  <label for="first_name" class="text-muted">First Name <span class="text-danger">*</span></label>
+                  <input type="text" name="first_name" id="first_name" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="last_name" class="text-muted">Last Name <span class="text-danger">*</span></label>
+                  <input type="text" name="last_name" id="last_name" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="date_of_birth" class="text-muted">Date of Birth</label>
+                  <input type="date" name="date_of_birth" id="date_of_birth" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mb-4">
+              <div class="row py-2 px-3">
+                <div class="col-md-12">
+                  <h4 class="fs-4 fw-semibold">Contact Info</h4>
+                  <p class=" text-muted fs-6 fw-normal"><i class="ri-question-line fs-6"></i> Receive
+                    booking confirmation & updates</p>
+                </div>
+                <div class="col-md-6 ps-2 pb-2">
+                  <label for="contact_number" class="text-muted">Contact Number <span
+                          class="text-danger">*</span></label>
+                  <input type="text" name="contact_number" id="contact_number" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="address" class="text-muted">Address</label>
+                  <input type="text" name="address" id="address" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="city" class="text-muted">City</label>
+                  <input type="text" name="city" id="city" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="conutry" class="text-muted">Country</label>
+                  <input type="text" name="conutry" id="conutry" class="form-control"
+                         value="Bangladesh">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row py-2 px-3">
+                <div class="col-md-12">
+                  <h4 class="fs-4 fw-semibold">Passport Info</h4>
+                  <p class=" text-muted fs-6 fw-normal"><i class="ri-question-line fs-6"></i> Travelers
+                    holding passport can fill up the the below form which will save more time during flight
+                    booking.</p>
+                </div>
+
+                <div class="col-md-6 ps-2 pb-2">
+                  <label for="passport_number" class="text-muted">Passport Number</label>
+                  <input type="text" name="passport_number" id="passport_number" class="form-control">
+                </div>
+                <div class="col-md-6 pb-2">
+                  <label for="passport_expiry_Date" class="text-muted">Passport Expiry Date</label>
+                  <input type="text" name="passport_expiry_Date" id="passport_expiry_Date"
+                         class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 px-4 pt-3 text-end">
+              <button type="button"
+                      class="btn btn-primary px-5 py-2 fs-6 fw-semibold text-uppercase">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        let info = document.getElementById('info');
+        let infoCardEdit = document.getElementById('infoCardEdit');
+
+        function EditProfile()
+        {
+          info.classList.add("d-none");
+          infoCardEdit.classList.remove("d-none");
+        }
+
+        function Cancel()
+        {
+          infoCardEdit.classList.add("d-none");
+          info.classList.remove("d-none");
+        }
+      </script>
+    </div>
+  </div>
+</main>
+<!-- =========================footer start =========================-->
+<footer class="bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-capitalize text-light text-center py-4">
+        <h6 class="fs-6 fw-semibold">Copyright &copy;2023 All rights reserved by Flight Expert</h6>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/frontend/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/frontend/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Ticket Booking </title>
+  <link rel="stylesheet" th:href="@{/frontend/css/bootstrap.min.css}">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/frontend/css/main.css}">
+
+  <script th:src="@{/frontend/js/jquery-3.7.1.min.js}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"
+          integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+<!-- navbar start -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary py-2">
+  <div class="container">
+    <a class="navbar-brand text-primary fw-bolder fs-4" href="">Cheap Air</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/flight}">
+            flights
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/info}">
+            My Profile
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" th:href="@{/customer/booking}">
+            My Booking
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav fw-semibold" role="">
+        <ul th:if="${session.username}" class="navbar__user">
+          <li class="navbar__user-item"><a class="nav-link">Welcome <span th:text="${session.username}"></span></a></li>
+          <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/logout}">Đăng xuất</a></li>
+        </ul>
+        <ul th:unless="${session.username}" class="navbar__user">
+          <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/register}">Đăng ký</a></li>
+          <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/login}">Đăng nhập</a></li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- navbar end -->
+<main>
+  <div class="container flight_search_bg">
+    <div class="row">
+      <div class="col-md-12 py-2">
+        <div class="row justify-content-end">
+          <div class="col-md-9">
+            <div class="col-md-12 text-center">
+              <h2 class="fs-2 fw-bolder text-muted">All Flights</h2>
+              <h2 class="fs-2 fw-bolder text-muted d-none">Flights from Dhaka to Chittagong</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 pb-5">
+        <div class="container">
+          <div class="row">
+            <style>
+              .rangeslider {
+                position: relative;
+              }
+
+              .rangeslider:after {
+                top: 50%;
+                left: 0;
+                right: 0;
+                content: '';
+                width: 100%;
+                height: 5px;
+                margin-top: -2.5px;
+                border-radius: 5px;
+                position: absolute;
+                background: #5f5f69;
+              }
+
+              .rangeslider--horizontal {
+                width: 100%;
+                height: 28px;
+              }
+
+              .rangeslider--vertical {
+                width: 5px;
+                min-height: 150px;
+                max-height: 100%;
+              }
+
+              .rangeslider--disabled {
+                filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+                opacity: 0.4;
+              }
+
+              .rangeslider__fill {
+                position: absolute;
+                background: #0D6EFD;
+              }
+
+              .rangeslider--horizontal .rangeslider__fill {
+                top: 0;
+                height: 100%;
+              }
+
+              .rangeslider--vertical .rangeslider__fill {
+                bottom: 0;
+                width: 100%;
+              }
+
+              .rangeslider__handle {
+                top: 50%;
+                width: 28px;
+                height: 28px;
+                cursor: pointer;
+                margin-top: -14px;
+                background: white;
+                position: absolute;
+                background: #0D6EFD;
+                border-radius: 50%;
+                display: inline-block;
+              }
+
+              .rangeslider__handle:active {
+                background: #0D6EFD;
+              }
+
+              .rangeslider__fill,
+              .rangeslider__handle {
+                z-index: 1;
+              }
+
+              .rangeslider--horizontal .rangeslider__fill {
+                top: 50%;
+                height: 5px;
+                margin-top: -2.5px;
+              }
+            </style>
+            <div class="sidebar col-md-3">
+              <div class="card card-body">
+                <form class="row" action="" method="GET">
+                  <div class="col-md-12">
+                    <h6 class="fs-5 fw-semibold text-primary pb-1">Airlines</h6>
+                    <div th:each="airline : ${listAirline}" class="form-check mb-2" >
+                      <input class="form-check-input" name="" type="checkbox"
+                             value=" ">
+                      <label class="form-check-label text-muted">
+                        <span th:text="${airline.name}"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-12 py-3 text-center">
+                    <button type="submit" class="btn btn-primary">Fliter</button>
+                    <a href="" class="btn btn-outline-danger">Clear Filter</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="flights col-md-9">
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <div class="row">
+                    <div class="col-md-12"  th:each="item : ${listFlight}">
+                      <div class="card card-body">
+                        <div class="row" >
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-3 ps-3">
+                                <img th:src="${item.image != null ? '/manager/airline/images/' + item.image  : '/admin/products/images/noimg.png'}"
+                                     class="rounded-circle pt-2"
+                                     style="width: 150px;" alt="">
+                              </div>
+                              <div class="col-md-3 pt-3">
+                                <span class="text-muted fs-6 fw-semibold">Departure Date</span><br>
+                                <span th:text="${item.deparatureDate}" class="text-muted"></span><br>
+                                <span class="text-muted">Điểm đi</span><br>
+                                <span class="text-muted" th:text="${item.departureLocation}"></span>
+                                </span>
+                              </div>
+
+                              <div class="col-md-3 pt-3" >
+                                <span class="text-muted fs-6 fw-semibold">Thời gian cất cánh </span><br>
+                                <span th:text="${item.departureTime}" class="text-muted"></span><br>
+                                <span class="text-muted fs-6 fw-semibold">Note </span><br>
+                                <span th:text="${item.note}" class="text-muted"></span><br>
+                              </div>
+
+                              <div class="col-md-3 pt-3">
+                                <span class="text-muted fs-6 fw-semibold">Arrival Date</span><br>
+                                <span th:text="${item.arrivalDate}" class="text-muted"></span><br>
+                                <span class="text-muted">Điểm đến</span><br>
+                                <span class="text-muted" th:text="${item.arrivalLocation}"></span>
+                                </span>
+                              </div>
+                              <div class="col-md-12 pe-5 d-flex justify-content-between py-2">
+                                <div>
+                                  <span class="text-muted"><small>Price</small></span>
+                                  <h5 class="fs-6 fw-semibold" th:text="${item.price}">
+                                  </h5>
+                                </div>
+                                <button class="btn btn-primary text-capitalize mt-3">
+                                  <a th:href="@{'/customer/bill/add/'+ ${item.id}}"> book now</a>
+
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 py-3">
+                        <div class="row justify-content-center">
+                          <div class="col-md-6">
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<!--                <div class="col-md-12 mb-3">-->
+<!--                  <div class="row">-->
+<!--                    <div class="col-md-12">-->
+<!--                      <div class="card card-body text-center">-->
+<!--                        Flight Not Found-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- =========================footer start =========================-->
+<footer class="bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-capitalize text-light text-center py-4">
+        <h6 class="fs-6 fw-semibold">Copyright &copy;2023 All rights reserved by Flight Expert</h6>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script th:src="@{/frontend/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/frontend/js/main.js}"></script>
+
+</body>
+
+</html>
