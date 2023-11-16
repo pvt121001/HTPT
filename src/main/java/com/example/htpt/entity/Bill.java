@@ -14,12 +14,14 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "ticket")
 public class Bill {
     @Id
     private String id;
     private LocalDate ngayMua;
     private double totalAmount;
     private int quantity;
+    private int seats;
     @Enumerated(EnumType.STRING)
     private TypeFlight type;
     @ManyToOne

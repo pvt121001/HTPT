@@ -25,4 +25,7 @@ public class Plane {
     @ManyToOne
     @JoinColumn(name = "airline_id")
     private Airline airline;
+    @ManyToOne
+    @JoinColumn(name = "airport_id")
+    private Airports airports;
 }

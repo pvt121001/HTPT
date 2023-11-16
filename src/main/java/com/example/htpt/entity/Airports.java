@@ -19,6 +19,6 @@ public class Airports {
     private String id;
     private String name;
     private String address;
-//    @OneToMany(mappedBy = "airports")
-//    private List<Flight> flightList;
+    @OneToMany(mappedBy = "airports")
+    private List<Plane> planeList;
 }
