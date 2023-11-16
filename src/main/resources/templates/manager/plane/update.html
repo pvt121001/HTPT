@@ -140,13 +140,25 @@
                                         <input type="text" name="" class=" form-control" th:field="*{numberOfSeatType2}">
                                     </div>
                                     <div class="mb-2">
+                                        <label for="">Tổng số ghế</label>
+                                        <input type="text" name="" class=" form-control" th:field="*{totalSeat}">
+                                    </div>
+                                    <div class="mb-2">
                                         <label for="">Mô tả</label>
                                         <textarea name="" id="" rows="5" class=" form-control" th:field="*{des}"></textarea>
                                     </div>
                                     <div class="mb-2">
                                         <label for="">Hãng máy bay</label>
                                         <select name="airlineId" class=" form-control" th:field="*{airlineId}">
-                                            <option th:each="item: ${listAirline}" th:value="${item.id}" th:text="${item.name}" th:select="${item.id == planeDto.airlineId}">Airline Name</option>
+                                            <option th:each="item: ${listAirline}" th:value="${item.id}" th:text="${item.name}"
+                                                    th:select="${item.id == planeDto.airlineId}">Airline Name</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="">San Bay</label>
+                                        <select name="airlineId" class=" form-control" th:field="*{airportId}">
+                                            <option th:each="item: ${listAirport}" th:value="${item.id}" th:text="${item.name}"
+                                                    th:select="${item.id == planeDto.airportId}">Airline Name</option>
                                         </select>
                                     </div>
                                 </div>

@@ -34,9 +34,8 @@
       <div>
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" th:field="*{gender}" required>
-          <option value="MALE">Male</option>
-          <option value="FEMALE">Female</option>
-          <option value="OTHER">Other</option>
+          <option th:value="MALE">Male</option>
+          <option th:value="FEMALE">Female</option>
         </select>
       </div>
       <div>

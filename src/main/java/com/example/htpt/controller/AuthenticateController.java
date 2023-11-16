@@ -61,7 +61,7 @@ public class AuthenticateController {
             modelAndView.addObject("errors", result.getAllErrors());
         }
         UserDto newUser = userService.register(dto);
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("redirect:/auth/login");
         session.setAttribute("username", newUser.getUsername());
         return modelAndView;
     }

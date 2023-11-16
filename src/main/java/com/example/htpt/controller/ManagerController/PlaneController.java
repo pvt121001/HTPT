@@ -1,11 +1,15 @@
 package com.example.htpt.controller.ManagerController;
 
 import com.example.htpt.entity.Airline;
+import com.example.htpt.entity.Airports;
 import com.example.htpt.entity.dto.AirlineDto;
 import com.example.htpt.entity.dto.AirportDto;
 import com.example.htpt.entity.dto.PlaneDto;
 import com.example.htpt.mapper.AirlineMapper;
+import com.example.htpt.repository.AirlineRepository;
+import com.example.htpt.repository.AirportRepository;
 import com.example.htpt.service.AirlineService;
+import com.example.htpt.service.AirportService;
 import com.example.htpt.service.PlaneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -25,10 +29,17 @@ import java.util.List;
 public class PlaneController {
     private final PlaneService planeService;
     private final AirlineService airlineService;
+    private final AirportService airportService;
+    private final AirlineRepository airlineRepository;
+    private final AirportRepository airportRepository;
 
     @ModelAttribute("listAirline")
     public List<AirlineDto> getAirlines(){
         return airlineService.getAllAirline();
+    }
+    @ModelAttribute("listAirport")
+    public List<AirportDto> getAirports(){
+        return airportService.getAllAirport();
     }
     @GetMapping("")
     public String getAllPlane(Model model){
@@ -54,13 +65,15 @@ public class PlaneController {
     }
 
     @PostMapping("/add-plane")
-    public String createPlane(@ModelAttribute PlaneDto planeDto, BindingResult result){
+    public String createPlane(@ModelAttribute PlaneDto planeDto, BindingResult result)
+    {
         if(result.hasErrors()){
             System.out.println("has err");
         }
         Airline airline = new Airline();
-        AirlineDto airlineDto = AirlineMapper.MAPPER.mapToAirlineDto(airline);
         planeDto.setAirline(airline);
+        Airports airports = new Airports();
+        planeDto.setAirports(airports);
         planeService.save(planeDto);
         return "redirect:/manager/plane";
     }
@@ -96,13 +109,15 @@ public class PlaneController {
     }
 
     @PostMapping("save")
-    public String save(Model model, @Valid @ModelAttribute("planeDto") PlaneDto planeDto, BindingResult result) {
+    public String save(Model model, @Valid @ModelAttribute("planeDto") PlaneDto planeDto, BindingResult result)
+    {
         if(result.hasErrors()){
-            return "redirect:/manager/plane/update/{airlineId}";
+            return "redirect:/manager/plane/update/{planeId}";
         }
-        Airline airline = new Airline();
-        AirlineDto airlineDto = AirlineMapper.MAPPER.mapToAirlineDto(airline);
+        Airline airline = airlineRepository.findById(planeDto.getAirlineId()).orElse(null);
         planeDto.setAirline(airline);
+        Airports airports = airportRepository.findById(planeDto.getAirportId()).orElse(null);
+        planeDto.setAirports(airports);
         planeService.save(planeDto);
         model.addAttribute("message", "Update thanh cong");
         return "redirect:/manager/plane";

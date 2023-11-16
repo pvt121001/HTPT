@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, String> {
-    @Query(value = "select * from bill where user_id = ?1", nativeQuery = true)
+    @Query(value = "select * from Ticket where user_id = ?1", nativeQuery = true)
     List<Bill> getMyBooking(String username);
 }

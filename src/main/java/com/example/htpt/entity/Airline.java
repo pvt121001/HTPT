@@ -1,9 +1,6 @@
 package com.example.htpt.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -20,6 +17,6 @@ public class Airline {
     private String id;
     private String name;
     private String image;
-    @OneToMany(mappedBy ="airline", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="airline", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Plane> planeList;
 }
