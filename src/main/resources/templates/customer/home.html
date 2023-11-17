@@ -44,7 +44,7 @@
       <ul class="navbar-nav fw-semibold" role="">
             <ul th:if="${session.username}" class="navbar__user">
               <li class="navbar__user-item"><a class="nav-link">Welcome <span th:text="${session.username}"></span></a></li>
-              <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/logout}">Đăng xuất</a></li>
+              <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/login}">Đăng xuất</a></li>
             </ul>
             <ul th:unless="${session.username}" class="navbar__user">
               <li class="navbar__user-item"><a class="nav-link" th:href="@{/auth/register}">Đăng ký</a></li>
